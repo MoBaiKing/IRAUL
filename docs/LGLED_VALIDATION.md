@@ -56,7 +56,7 @@ Four independent projectors would contain 5,548,032 parameters. The default sing
 
 Single-GPU B=1 allocated memory was 14,607,316,480 bytes before forward, 14,709,963,776 after forward, 14,728,298,496 after backward, and 14,771,035,136 peak. Text-Qwen forward was 0.382 s, the complete LG-LED call was 0.023 s, and whole-model forward was 0.664 s.
 
-The 20-step four-rank peaks were 15,264,192,512; 15,318,716,928; 15,507,271,168; and 15,277,582,336 bytes. Mean relation belief was agreement=0.411, ambiguity=0.211, conflict=0.377; mean strength=6.234, mean uncertainty=0.513, mean routing gate=0.230. No initial all-uniform/single-class relation collapse, evidential-strength explosion, or routing-to-zero/one collapse was observed. This short smoke is a runtime check, not a convergence or accuracy claim.
+The 20-step four-rank peaks were 15,264,192,512; 15,318,716,928; 15,507,271,168; and 15,277,582,336 bytes. Mean relation belief was agreement=0.411, multiplicity=0.211, conflict=0.377; mean strength=6.234, mean uncertainty=0.513, mean routing gate=0.230. No initial all-uniform/single-class relation collapse, evidential-strength explosion, or routing-to-zero/one collapse was observed. This short smoke is a runtime check, not a convergence or accuracy claim.
 
 ## Current risks
 

@@ -22,7 +22,7 @@ PAIR_ORDER = (
     ("vision", "interaction"),
     ("intrinsic_feature", "interaction"),
 )
-RELATION_ORDER = ("agreement", "ambiguity", "conflict")
+RELATION_ORDER = ("agreement", "multiplicity", "conflict")
 EVIDENCE_INDEX = {name: index for index, name in enumerate(EVIDENCE_ORDER)}
 PAIR_INDEX = {pair: index for index, pair in enumerate(PAIR_ORDER)}
 PAIR_EVIDENCE_INDICES = tuple(

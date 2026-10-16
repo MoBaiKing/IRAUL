@@ -283,7 +283,7 @@ class CorruptionTests(unittest.TestCase):
             for ext in ("png", "pdf"):
                 self.assertGreater((output / f"figures/{method}_robustness.{ext}").stat().st_size, 1000)
         # Mean/std are tested with distinct per-seed observations too.
-        records = [{"dataset": "d", "method": "LEDGER", "corruption": "clean", "severity": 0,
+        records = [{"dataset": "d", "method": "LEDCS-FND", "corruption": "clean", "severity": 0,
                     "corruption_seed": 2027, "evaluation_scope": "full_test", "samples": 2,
                     "checkpoint_seed": seed, "macro_f1": score} for seed, score in enumerate((.4, .6))]
         summary = aggregate_rows(records)[0]

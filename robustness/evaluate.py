@@ -55,7 +55,7 @@ def parser():
     p.add_argument("--corruption-seed", type=int, default=int(os.environ.get("CORRUPTION_SEED", "2027")))
     p.add_argument("--suite", action="store_true", help="Clean once + Gaussian/typo at .05, .10, .20")
     p.add_argument("--output-dir", type=Path, help="New result directory; refuses existing run files")
-    p.add_argument("--method", default="LEDGER", help="CSV method label, supports future baselines")
+    p.add_argument("--method", default="LEDCS-FND", help="CSV method label, supports future baselines")
     p.add_argument("--per-gpu-batch-size", "--batch-size", dest="batch_size", type=int)
     p.add_argument("--num-workers", type=int)
     p.add_argument("--device", default="auto", help="auto, cpu, cuda:0, ...; CPU evaluates in FP32")

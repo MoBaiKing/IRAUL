@@ -123,7 +123,7 @@ class RandomTypoTokenInjection:
             "truncated_original_tokens": len(original) - sum(origin is not None for origin in kept_origins),
             "truncated_tokens": overflow, "final_length": len(result),
             # Optional provenance for baseline token_type_ids / aligned fields.
-            # Does not affect sampling, IDs, truncation or the LEDGER pipeline.
+            # Does not affect sampling, IDs, truncation or the LEDCS-FND pipeline.
             "source_positions": kept_origins,
             "anchor_positions": [anchor for i, anchor in enumerate(anchors) if i not in removed],
         }

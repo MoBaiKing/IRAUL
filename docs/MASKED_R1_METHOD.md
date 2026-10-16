@@ -8,7 +8,7 @@ The existing encoder constructs T=text, V=vision, E=intrinsic_feature, X=interac
 
 The strict sequence is `[T,V,E,X,TV,TE,TX,VE,VX,EX,G]`. Every selected layer receives a per-example additive mask: evidence reads itself; pair reads its endpoints and itself; G reads valid evidence/pairs/self. Invalid queries have self loops; no valid query reads an invalid token. Empty main-model inputs fail. `latent_view_mask` deletes already-generated representations; `raw_modality_intervention` changes input tensors and regenerates E/X.
 
-Reference singleton Fake probabilities define r=2q-1 and t=[max(r_i r_j,0),1-|r_i r_j|,max(-r_i r_j,0)]. These are reference-task agreement/ambiguity/conflict, not human fact relations. Two wrong views may agree. A does not mean correct; M does not mean vacuity.
+Reference singleton Fake probabilities define r=2q-1 and t=[max(r_i r_j,0),1-|r_i r_j|,max(-r_i r_j,0)]. These are reference-task agreement/multiplicity/conflict, not human fact relations. Two wrong views may agree. A does not mean correct; M does not mean vacuity.
 
 Relation evidence is softplus(raw logits), alpha=e+1, P=alpha/S, U=3/S, b=(alpha-1)/S. `relation_vacuity` is the main name; `relation_uncertainty` is a compatibility alias only. Conflict belief is b_C=P_C-U/3, not P_C(1-U). All evidence/KL/digamma/loss arithmetic is FP32. The loss is the explicitly designed soft-target extension of supervised EDL: each class-specific concentration has that class replaced by 1, and its digamma loss + beta*Dirichlet KL is weighted by t_r. It is not an unchanged formula from the EDL paper and does not establish calibration of U.
 

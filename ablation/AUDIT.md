@@ -23,7 +23,7 @@ M=本批所有图片数，P=图片 patch 数。T/V/E/X 均为 `[B,D]`。
 | Pair/Global 槽位 | `LatentJudgeTokenBank`, LG-LED `forward` | evidence 0..3 + pair 4..9 + G=10 → `[B,11,H]` | `judge_type`, `use_global_judge` | Pair 固定为 TV、TE、TX、VE、VX、EX；删除末尾 G 不移动 pair 编号 |
 | evaluator attention | `_run_qwen_last_layers` | 11 token → 共享 Qwen 最后 N 层 → `[B,11,H]` | `latent_judge_num_layers=2` | 标准因果可见性 j≤i，attention 输入全 1；缺失 evidence 投影清零，但正式实现并未在 attention 中屏蔽其 key |
 | 非 LLM evaluator | 原 `MLPPairJudge`（本次不用） / 新 `SmallCausalEvaluator` | 相同槽位 H→h→随机 Transformer→H | `ablation.non_llm_evaluator` | 新对照保留因果可见性，使用固定正弦位置编码；结构、容量和预训练条件都改变 |
-| 关系头 | `EvidentialRelationHead.forward` | pair states `[B,6,H]` → softplus evidence、alpha=e+1、p `[B,6,3]` | `use_evidential_relation` | 类别保持 **agreement / ambiguity / conflict**；无 pair 真实关系标签 |
+| 关系头 | `EvidentialRelationHead.forward` | pair states `[B,6,H]` → softplus evidence、alpha=e+1、p `[B,6,3]` | `use_evidential_relation` | 类别保持 **agreement / multiplicity / conflict**；无 pair 真实关系标签 |
 | 关系 uncertainty | 同上及 LG-LED `forward` | u=3/sum(alpha)，`[B,6]` | `use_uncertainty`（原开关不彻底）；v2 `no_uncertainty` | 影响 certified conflict、deviation、minority、adjudication、routing、IURD；v2 在源头消除全部显式路径 |
 | evidence confidence | `EvidenceConfidenceHead.forward` | latent evidence states `[B,4,H]` → `[B,4]` | 无独立开关 | 独立 learned head，不是直接把 u 重命名成 confidence；原 Direct 读取它，因此原 Direct 含 latent 信息 |
 | Critical Minority | `CriticalMinorityHead.forward` | evidence state + confidence/deviation/mean u/mean conflict → 4 个标量 | `use_critical_minority` | 没有单独少数证据聚合通道；标量进入 adjudication scorer。关闭后用常量槽位，剩余证据 softmax 正常归一化 |

@@ -1,5 +1,7 @@
-# LEDGER-FND: Latent Evidence Deliberation with Global Evidence Reweighting for Multimodal Fake News Detection
-The current implementation is strict masked R1 in the `LEDGER-FND` workspace, selected explicitly as `qwen_lora_lgled_masked_r1`. Historical configurations remain available for named legacy comparisons. The original tracked tree is preserved at `/data/dyl/sotamodelv3_mask_7649c557_pre_r1.tar` (base `7649c557b5d36bbd205ae353c96590b682a30402`).
+# LEDCS-FND: Latent Evidence Deliberation with Global Evidence Reweighting for Multimodal Fake News Detection
+The current implementation is strict masked R1 in the `LEDCS-FND` workspace, selected explicitly as `qwen_lora_lgled_masked_r1`. Historical configurations remain available for named legacy comparisons. The original tracked tree is preserved at `/data/dyl/sotamodelv3_mask_7649c557_pre_r1.tar` (base `7649c557b5d36bbd205ae353c96590b682a30402`).
+
+The relation order is **Agreement / Multiplicity / Conflict (A/M/C)**. Multiplicity names the existing middle component, `1 - |r_i r_j|`; its index, targets, and trained parameters are unchanged. Historical result keys, checkpoint identities, and legacy paths remain readable. On the experiment servers, `/data/dyl/LEDCS-FND` points to the existing workspace.
 
 Legacy: four views → shared Qwen strict deliberation → confidence/minority/global/direct scores → two-path fusion/IURD.
 
@@ -12,7 +14,7 @@ R1: same T/V/E/X → same shared Qwen last two layers with sample-specific stric
 - [Actual scheduled four-seed job](docs/MASKED_R1_SCHEDULE.md)
 
 ```bash
-cd /data/dyl/LEDGER-FND
+cd /data/dyl/LEDCS-FND
 CUDA_VISIBLE_DEVICES='' .venv/bin/python -m pytest tests -q
 bash scripts/run_masked_r1.sh --help
 # GPU window only; all does not run test:
@@ -39,7 +41,7 @@ CUTE-FND v3 is a multimodal fake-news classifier whose fourth stage is **LLM-Gui
 
 V2 used a similarity-driven Relational Evidence Graph: four 384-D nodes were connected by cosine-derived adjacency, updated by graph message passing, attentively pooled, and injected as a residual. V3 removes that graph path. It uses one shared Qwen2.5-7B-Instruct backbone for both textual encoding and latent cross-evidence adjudication. No second Qwen, four-model agent ensemble, natural-language debate, RAG, knowledge graph, GNN, or plain MHA fusion is used.
 
-Agreement, ambiguity, and conflict are **task-driven learned latent relation beliefs**. They are not claims that Qwen establishes true logical contradiction because the supported datasets provide only Fake/Real labels, not pair-level relation labels.
+Agreement, multiplicity, and conflict are **task-driven learned latent relation beliefs**. They are not claims that Qwen establishes true logical contradiction because the supported datasets provide only Fake/Real labels, not pair-level relation labels.
 
 ## Evaluation protocol (updated 2026-09-13)
 
@@ -77,7 +79,7 @@ Four Evidence Role Embeddings
         ↓
 The same Qwen2.5-7B Last-2 Decoder Layers
         ↓
-Dirichlet Agreement / Ambiguity / Conflict + Uncertainty
+Dirichlet Agreement / Multiplicity / Conflict + Uncertainty
         ↓
 Confidence → Uncertainty-Aware Deviation → Critical Minority
         ↓

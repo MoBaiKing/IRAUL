@@ -7,7 +7,7 @@
 环境：Python 3.10，PyTorch 2.4.1+cu124，Transformers 4.46.3，PEFT 0.13.2。
 使用 `/data/dyl/sotamodelv5/.venv/bin/python` 复用本机依赖。
 
-## A. Clean equivalence：真实 LEDGER checkpoint
+## A. Clean equivalence：真实 LEDCS-FND checkpoint
 
 checkpoint：
 
@@ -121,7 +121,7 @@ Gaussian/Typo 各一套 PDF/PNG。checkpoint 文件哈希前后保持一致。
 `test_artifacts/real_multiseed_preflight/run_manifest.json`。
 
 尚未运行全量 test × 全 severity × 多 seed 的正式论文实验。
-5-seed 全流程检查使用临时 fixture，不能被误解为 5 个真实 LEDGER checkpoint 的性能实验。
+5-seed 全流程检查使用临时 fixture，不能被误解为 5 个真实 LEDCS-FND checkpoint 的性能实验。
 完整正式运行命令见 README；默认不带 limit_samples，继承每个 checkpoint 的原配置。
 
 ## 最后核对
@@ -131,4 +131,4 @@ Gaussian/Typo 各一套 PDF/PNG。checkpoint 文件哈希前后保持一致。
 - 没有模型结构、loss、checkpoint 格式或源数据修改，没有重新训练。
 - severity=0 直接复用原数据路径，真实 checkpoint 输出差异为零。
 - 所有统计沿用原 metrics 和标签方向，每个 severity 冻结该 checkpoint 的 validation 阈值。
-- 已有 LEDGER clean 结果文件保持原样，所有新结果写入独立目录。
+- 已有 LEDCS-FND clean 结果文件保持原样，所有新结果写入独立目录。
