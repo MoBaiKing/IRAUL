@@ -1,10 +1,10 @@
-# Masked R1 implementation
+# LEDCS-FND implementation (masked R1)
 
 ## Model and quantities
 
-`qwen_lora_lgled_masked_r1` is an explicit factory branch. The existing `qwen_lora_lgled_v3` branch and original configs remain legacy. The real workspace name is `sotamodelv3_mask`, not `sotamodelv3_masked`; remote and per-layer implementation establish its identity.
+`qwen_lora_lgled_masked_r1` is an explicit factory branch. The existing `qwen_lora_lgled_v3` branch and original configs remain legacy. The method is LEDCS-FND: Latent Evidence Deliberation with Contribution Supervision for Multimodal Fake News Detection. The experiment-server entry point is `/data/dyl/LEDCS-FND`; legacy workspace paths and architecture identifiers remain valid.
 
-The existing encoder constructs T=text, V=vision, E=intrinsic_feature, X=interaction. E and X already depend on text and vision. These are four internal representations, not four independent external evidence sources. Qwen text encoding and the last-two-layer 11-token deliberation share the same Qwen/LoRA parameters. LoRA remains q_proj/v_proj across all Qwen layers. Hidden size comes from config; default evidence D=384.
+The paper names the four views textual (T), visual (V), elementwise (E), and cross-modal interaction (X). Their runtime keys are T=text, V=vision, E=intrinsic_feature, X=interaction; these keys are retained for checkpoint and cache compatibility. E and X already depend on text and vision. These are four internal representations, not four independent external evidence sources. Qwen text encoding and the last-two-layer 11-token deliberation share the same Qwen/LoRA parameters. LoRA remains q_proj/v_proj across all Qwen layers. Hidden size comes from config; default evidence D=384.
 
 The strict sequence is `[T,V,E,X,TV,TE,TX,VE,VX,EX,G]`. Every selected layer receives a per-example additive mask: evidence reads itself; pair reads its endpoints and itself; G reads valid evidence/pairs/self. Invalid queries have self loops; no valid query reads an invalid token. Empty main-model inputs fail. `latent_view_mask` deletes already-generated representations; `raw_modality_intervention` changes input tensors and regenerates E/X.
 

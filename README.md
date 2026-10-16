@@ -1,7 +1,9 @@
-# LEDCS-FND: Latent Evidence Deliberation with Global Evidence Reweighting for Multimodal Fake News Detection
+# LEDCS-FND: Latent Evidence Deliberation with Contribution Supervision for Multimodal Fake News Detection
 The current implementation is strict masked R1 in the `LEDCS-FND` workspace, selected explicitly as `qwen_lora_lgled_masked_r1`. Historical configurations remain available for named legacy comparisons. The original tracked tree is preserved at `/data/dyl/sotamodelv3_mask_7649c557_pre_r1.tar` (base `7649c557b5d36bbd205ae353c96590b682a30402`).
 
 The relation order is **Agreement / Multiplicity / Conflict (A/M/C)**. Multiplicity names the existing middle component, `1 - |r_i r_j|`; its index, targets, and trained parameters are unchanged. Historical result keys, checkpoint identities, and legacy paths remain readable. On the experiment servers, `/data/dyl/LEDCS-FND` points to the existing workspace.
+
+Paper terminology names the four views **textual (T), visual (V), elementwise (E), and cross-modal interaction (X)**. The corresponding runtime keys remain `text`, `vision`, `intrinsic_feature`, and `interaction` for compatibility with existing checkpoints and analysis files.
 
 Legacy: four views → shared Qwen strict deliberation → confidence/minority/global/direct scores → two-path fusion/IURD.
 
@@ -61,7 +63,7 @@ The four real code-level evidence representations are:
 
 1. `text`: final non-padding Qwen text state projected to D.
 2. `vision`: mean SigLIP image representation projected to D and aggregated per post.
-3. `intrinsic_feature`: intrinsic/event evidence derived from text self-relations and local/global text-image alignment.
+3. `intrinsic_feature`: elementwise evidence (E), derived from text self-relations and local/global text-image alignment; the runtime key retains its historical name.
 4. `interaction`: cross-modal representation of `|text-vision|` and `text*vision`.
 
 `D` is configurable and currently 384. Qwen hidden size and layer count are read dynamically from `qwen.config`.
