@@ -1,8 +1,8 @@
-# LEDCS-FND implementation (masked R1)
+# IRAUL: Inductive Relation-Aware Evidence Utility Learning for Multimodal Fake News Detection
 
 ## Model and quantities
 
-`qwen_lora_lgled_masked_r1` is an explicit factory branch. The existing `qwen_lora_lgled_v3` branch and original configs remain legacy. The method is LEDCS-FND: Latent Evidence Deliberation with Contribution Supervision for Multimodal Fake News Detection. The experiment-server entry point is `/data/dyl/LEDCS-FND`; legacy workspace paths and architecture identifiers remain valid.
+`qwen_lora_lgled_masked_r1` is an explicit factory branch. The existing `qwen_lora_lgled_v3` branch and original configs remain legacy. The method is IRAUL: Inductive Relation-Aware Evidence Utility Learning for Multimodal Fake News Detection. The experiment-server entry point is `/data/dyl/IRAUL`; legacy workspace paths and architecture identifiers remain valid.
 
 The paper names the four views textual (T), visual (V), elementwise (E), and cross-modal interaction (X). Their runtime keys are T=text, V=vision, E=intrinsic_feature, X=interaction; these keys are retained for checkpoint and cache compatibility. E and X already depend on text and vision. These are four internal representations, not four independent external evidence sources. Qwen text encoding and the last-two-layer 11-token deliberation share the same Qwen/LoRA parameters. LoRA remains q_proj/v_proj across all Qwen layers. Hidden size comes from config; default evidence D=384.
 

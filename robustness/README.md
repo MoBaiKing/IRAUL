@@ -215,7 +215,7 @@ JSON 用 null（`undefined_metrics` 明确列出），CSV 用空值，不伪造 
 `--uncertainty shade|errorbar|none`，默认 shaded sample std。
 `--csv` 可以接受多个具有同样列格式、不同 `method` 的 baseline CSV。
 重复的 method/seed/severity 或不完整 seed cohort 会报错；不同 dataset 自动分目录。
-不要把相同 LEDCS-FND clean 重复放进多个输入 CSV。绘图默认拒绝诊断子集，
+不要把相同 IRAUL clean 重复放进多个输入 CSV。绘图默认拒绝诊断子集，
 显式 `--allow-subset` 才能绘制带 diagnostic subset 标题的子集图。
 
 ## Correctness tests

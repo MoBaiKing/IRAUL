@@ -1,6 +1,6 @@
 # Reproducible protocol and executable commands
 
-Run from `/data/dyl/sotamodelv3_mask`. Existing `.venv`, pretrained files and official manifests are reused. No environment upgrade or full model download was performed. Current immediate execution uses CPU only (`CUDA_VISIBLE_DEVICES=''`). The scheduled GPU suite is separate.
+Run from `/data/dyl/IRAUL`. Existing `.venv`, pretrained files and official manifests are reused. No environment upgrade or full model download was performed. Current immediate execution uses CPU only (`CUDA_VISIBLE_DEVICES=''`). The scheduled GPU suite is separate.
 
 ## Reference isolation and replay
 
@@ -21,7 +21,7 @@ Validation uses one complete, unsampled loader on rank 0; other ranks wait at sy
 ## Unified stages
 
 ```bash
-cd /data/dyl/sotamodelv3_mask
+cd /data/dyl/IRAUL
 CUDA_VISIBLE_DEVICES='' bash scripts/run_masked_r1.sh --dataset weibo21 --stage preflight --seed 20260916
 # GPU commands below are for the scheduled/explicit GPU window only.
 bash scripts/run_masked_r1.sh --dataset weibo21 --stage reference --seed 20260916 --nproc 4

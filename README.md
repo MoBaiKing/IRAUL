@@ -1,7 +1,7 @@
-# LEDCS-FND: Latent Evidence Deliberation with Contribution Supervision for Multimodal Fake News Detection
-The current implementation is strict masked R1 in the `LEDCS-FND` workspace, selected explicitly as `qwen_lora_lgled_masked_r1`. Historical configurations remain available for named legacy comparisons. The original tracked tree is preserved at `/data/dyl/sotamodelv3_mask_7649c557_pre_r1.tar` (base `7649c557b5d36bbd205ae353c96590b682a30402`).
+# IRAUL: Inductive Relation-Aware Evidence Utility Learning for Multimodal Fake News Detection
+The current implementation is strict masked R1 in the `IRAUL` workspace, selected explicitly as `qwen_lora_lgled_masked_r1`. Historical configurations remain available for named legacy comparisons. The original tracked tree is preserved at `/data/dyl/sotamodelv3_mask_7649c557_pre_r1.tar` (base `7649c557b5d36bbd205ae353c96590b682a30402`).
 
-The relation order is **Agreement / Multiplicity / Conflict (A/M/C)**. Multiplicity names the existing middle component, `1 - |r_i r_j|`; its index, targets, and trained parameters are unchanged. Historical result keys, checkpoint identities, and legacy paths remain readable. On the experiment servers, `/data/dyl/LEDCS-FND` points to the existing workspace.
+The relation order is **Agreement / Multiplicity / Conflict (A/M/C)**. Multiplicity names the existing middle component, `1 - |r_i r_j|`; its index, targets, and trained parameters are unchanged. Historical result keys, checkpoint identities, and legacy paths remain readable. On the experiment servers, `/data/dyl/IRAUL` points to the existing workspace.
 
 Paper terminology names the four views **textual (T), visual (V), elementwise (E), and cross-modal interaction (X)**. The corresponding runtime keys remain `text`, `vision`, `intrinsic_feature`, and `interaction` for compatibility with existing checkpoints and analysis files.
 
@@ -16,7 +16,7 @@ R1: same T/V/E/X → same shared Qwen last two layers with sample-specific stric
 - [Actual scheduled four-seed job](docs/MASKED_R1_SCHEDULE.md)
 
 ```bash
-cd /data/dyl/LEDCS-FND
+cd /data/dyl/IRAUL
 CUDA_VISIBLE_DEVICES='' .venv/bin/python -m pytest tests -q
 bash scripts/run_masked_r1.sh --help
 # GPU window only; all does not run test:
@@ -122,8 +122,8 @@ High deviation does not cause evidence deletion. The differentiable critical-min
 Python 3.10, PyTorch 2.4.1, Transformers 4.46.3, and PEFT 0.13 are the tested API contract.
 
 ```bash
-git clone https://github.com/MoBaiKing/sotamodelvqwen.git
-cd sotamodelvqwen
+git clone https://github.com/MoBaiKing/IRAUL.git
+cd IRAUL
 bash scripts/setup_environment.sh
 ```
 
